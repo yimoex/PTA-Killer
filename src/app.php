@@ -16,6 +16,7 @@ class App {
 
     public function init($ai_path = ROOT . '/api/models/'){
         $this -> ai -> init($ai_path);
+        $this -> ai -> select(false, 'uiui');
     }
 
     public function scan(){
@@ -82,8 +83,12 @@ class App {
         return $res;
     }
 
-    public function finishProgarm($progarm){
-        return $this -> ai -> send('帮我写以下问题的代码: ' . $progarm);
+    public function finishProgarm($progarm, $extMessage = ''){
+        return $this -> ai -> send('帮我写以下问题的代码: ' . $progarm . $extMessage);
+    }
+
+    public function finishProgarmRaw($message){
+        return $this -> ai -> send($message);
     }
 
     public function exec($caller, ...$param){
