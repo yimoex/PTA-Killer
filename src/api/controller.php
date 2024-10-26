@@ -9,7 +9,7 @@ class Controller {
 
     public $current;
 
-    public function init($path = './models/'){
+    public function init($path = ROOT . '/api/models/'){
         foreach($this -> scanner($path) as $scan){
             $raw = $this -> getFileName($scan);
             $name = ucfirst($raw);
@@ -21,6 +21,7 @@ class Controller {
                 Console::add("成功载入 [{$name}] AI模型[{$t -> model}]", 'Ai-Controller');
             }
         }
+        $this -> select(true);
     }
 
     public function send($message){
@@ -28,8 +29,12 @@ class Controller {
     }
 
     public function select($isRandom = true, $name = ''){
-        if($isRandom || !isset($this -> ai[$name])) return array_rand($this -> ai);
-        return $this -> ai[$name];
+        if($isRandom || $name == NULL || !isset($this -> ai[$name])){
+            $this -> current = array_rand($this -> ai);
+            return true;
+        }
+        $this -> current = $this -> ai[$name];
+        return true;
     }
 
     public function scanner($path){
