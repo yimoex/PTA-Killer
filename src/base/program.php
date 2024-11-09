@@ -2,10 +2,10 @@
 namespace YimoEx\Pta;
 
 //题集-问题
-class Progarm extends Base {
+class Program extends Base {
 
     public static function create(array $data){
-        $pro = new Progarm();
+        $pro = new Program();
         foreach($data as $k => $v){
             $pro -> set($k, $v);
         }

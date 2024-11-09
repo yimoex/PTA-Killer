@@ -16,11 +16,11 @@ class App {
 
     public function init($ai_path = ROOT . '/api/models/'){
         $this -> ai -> init($ai_path);
-        $this -> ai -> select(false, 'uiui');
+        $this -> ai -> select(false, 'kimi');
     }
 
     public function scan(){
-        $lastday = date('Y-m-d', time() - 86400);
+        $lastday = date('Y-m-d', time() - 864000);
         $res = json_decode($this -> pta -> problemSet(''), true);
         if($res == NULL) return false;
         if(!isset($res['total'])) exit('Error: 不能访问');
@@ -51,7 +51,7 @@ class App {
         $this -> pta -> selectProblemSet($set_id);
         $res = json_decode($this -> pta -> problemExamProgaming($problem_id), true);
         if($res == NULL) return false;
-        return Progarm::create($res['problemSetProblem']);
+        return Program::create($res['problemSetProblem']);
     }
 
     public function examInfo($set_id){
